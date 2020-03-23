@@ -220,7 +220,7 @@ def get_rsp_data():
                 tmp['RSPPropertyAddress'] = tmp['RSPPropertyAddress'].replace(origin, header)
                 full_data.append(tmp)
 
-    full_data = splithouse(full_data, 'RSPPropertyAddress', 'RSPRoomId', 'RSPHeader')
+    # full_data = splithouse(full_data, 'RSPPropertyAddress', 'RSPRoomId', 'RSPHeader')
 
     for item in full_data:
         item['RSPPropertyAddress'] = strategy3(item['RSPPropertyAddress'])
@@ -253,6 +253,14 @@ def house_mapping():
         header = item['RSPHeader']
         if header in header_list:
             rsp_header_data[header][item['RSPPropertyAddress']] = item
+            matched = re.search(r'\d+-\d+', item['RSPPropertyAddress'])
+
+            """不可分裂"""
+            if not matched: continue
+
+            split_list = splitaddress(item['RSPPropertyAddress'], matched)
+            for address in split_list:
+                rsp_header_data[header][address] = item
 
     print('rsp header finished!')
 
