@@ -1,0 +1,23 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "gcc build active file",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-g",
+                "${file}",
+                "/root/workspace/HouseMapping/cmapping/src/address.c",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-I/root/workspace/HouseMapping/cmapping/include",
+                "-lpython3.6m",
+                "-std=c99"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            }
+        }
+    ],
+    "version": "2.0.0"
+}
